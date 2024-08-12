@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="http://0.0.0.0:8000/api/generate" method="post">
+        WBC: <input type="text" id="WBC"> <br /> <br />
+        RBC: <input type="text" id="RBC"> <br /> <br />
+        HGB: <input type="text" id="HGB"> <br /> <br />
+        Creatinine: <input type="text" id="Creatinine"> <br /> <br />
+        Glucose: <input type="text" id="Glucose"> <br /> <br />
+        cholesterol: <input type="text" id="cholesterol"> <br /> <br />
+        <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+    <script>
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const WBC = document.getElementById('WBC').value;
+            const RBC = document.getElementById('RBC').value;
+            const HGB = document.getElementById('HGB').value;
+            const Creatinine = document.getElementById('Creatinine').value;
+            const Glucose = document.getElementById('Glucose').value;
+            const cholesterol = document.getElementById('cholesterol').value;
+            const response = await fetch("http://0.0.0.0:8000/api/generate", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    WBC,
+                    RBC,
+                    HGB,
+                    Creatinine,
+                    Glucose,
+                    cholesterol
+                })
+            });
+            const data = await response.json();
+            document.getElementById('response').innerHTML = JSON.stringify(data);
+        });
+    </script>
+</body>
+</html>

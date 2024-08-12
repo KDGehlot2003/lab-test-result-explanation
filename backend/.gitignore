@@ -1,0 +1,5 @@
+__pycache__
+llama
+llama.cpp
+venv
+.env
